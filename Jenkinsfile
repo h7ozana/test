@@ -26,9 +26,9 @@ node {
             app.push("${env.BUILD_NUMBER}")
         }
     }
-    
-    stage('Trigger ManifestUpdate') {
-                echo "triggering updatemanifestjob"
-                build job: 'updatemanifest', parameters: [def DOCKERTAG = "${env.BUILD_NUMBER}"]
-        }
+   def DOCKERTAG = "${env.BUILD_NUMBER}"
+
+      stage('Trigger ManifestUpdate') {
+          build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: DOCKERTAG)]
+  }
 }
