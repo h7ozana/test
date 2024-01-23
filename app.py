@@ -1,28 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# 간단한 메시지 리스트를 유지하기 위한 리스트
-messages = []
-
-
 @app.route('/')
 def index():
+    messages = ['공지사항']  # 원하는 공지사항 목록으로 변경
     return render_template('index.html', messages=messages)
-
-
-@app.route('/post_message', methods=['POST'])
-def post_message():
-    # POST 요청으로부터 메시지를 받아서 리스트에 추가
-    message = request.form.get('message')
-    messages.append(message)
-    return render_template('index.html', messages=messages)
-
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-
-
+    app.run(debug=True, host='0.0.0.0')
 
 
 
